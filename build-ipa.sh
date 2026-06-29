@@ -19,9 +19,12 @@ CLANG="$(xcrun --sdk iphoneos -f clang)"
   -miphoneos-version-min=10.0 \
   Sources/main.m \
   -o "$APP_DIR/$APP_NAME" \
+  -fobjc-link-runtime \
+  -framework Foundation \
   -framework UIKit \
   -framework MediaPlayer \
-  -framework QuartzCore
+  -framework QuartzCore \
+  -lobjc
 
 cp Resources/Info.plist "$APP_DIR/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $BUNDLE_ID" "$APP_DIR/Info.plist"

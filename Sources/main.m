@@ -7,7 +7,6 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *artistLabel;
 @property (nonatomic, strong) UIButton *playPauseButton;
-@property (nonatomic, strong) UISlider *volumeSlider;
 @property (nonatomic, strong) MPMusicPlayerController *player;
 @end
 
@@ -91,13 +90,10 @@
     volumeLabel.font = [UIFont systemFontOfSize:14.0];
     [view addSubview:volumeLabel];
 
-    self.volumeSlider = [[UISlider alloc] init];
-    self.volumeSlider.translatesAutoresizingMaskIntoConstraints = NO;
-    self.volumeSlider.minimumValue = 0.0f;
-    self.volumeSlider.maximumValue = 1.0f;
-    self.volumeSlider.value = self.player.volume;
-    [self.volumeSlider addTarget:self action:@selector(volumeChanged:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:self.volumeSlider];
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    volumeView.translatesAutoresizingMaskIntoConstraints = NO;
+    volumeView.showsRouteButton = NO;
+    [view addSubview:volumeView];
 
     NSDictionary *views = @{
         @"appTitle": appTitle,
@@ -108,7 +104,7 @@
         @"playPauseButton": self.playPauseButton,
         @"nextButton": nextButton,
         @"volumeLabel": volumeLabel,
-        @"volumeSlider": self.volumeSlider
+        @"volumeView": volumeView
     };
 
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[appTitle]-24-|"
@@ -123,9 +119,9 @@
                                                                   options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[volumeLabel]-24-|"
                                                                   options:0 metrics:nil views:views]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[volumeSlider]-24-|"
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[volumeView]-24-|"
                                                                   options:0 metrics:nil views:views]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[appTitle]-74-[titleLabel]-10-[artistLabel]-56-[pickButton(48)]-20-[previousButton(48)]-42-[volumeLabel]-8-[volumeSlider]"
+    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[appTitle]-74-[titleLabel]-10-[artistLabel]-56-[pickButton(48)]-20-[previousButton(48)]-42-[volumeLabel]-8-[volumeView]"
                                                                   options:0 metrics:nil views:views]];
 }
 
@@ -174,13 +170,6 @@
 
 - (void)nextTrack:(id)sender {
     [self.player skipToNextItem];
-}
-
-- (void)volumeChanged:(UISlider *)sender {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    self.player.volume = sender.value;
-#pragma clang diagnostic pop
 }
 
 - (void)nowPlayingChanged:(NSNotification *)notification {
