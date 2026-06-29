@@ -10,9 +10,10 @@ Simple Objective-C music player for jailbroken iOS 10 devices. It uses the syste
 4. Download the `MusicPlayer-ipa` artifact.
 5. Install `MusicPlayer.ipa` on the jailbroken device with AppSync installed.
 
-## Local macOS build
+## Local build with Theos
 
 ```sh
+export THEOS=/path/to/theos
 chmod +x ./build-ipa.sh
 ./build-ipa.sh
 ```
@@ -26,6 +27,6 @@ build/MusicPlayer.ipa
 ## Notes
 
 - Target minimum iOS version is `10.0`.
-- The GitHub Actions workflow uses `macos-14` and Xcode 15.0.1 because `macos-13` has been retired on GitHub-hosted runners.
-- The current build is `arm64` only.
+- The GitHub Actions workflow uses Theos with the iPhoneOS 10.3 SDK for legacy 32-bit devices.
+- The current CI build is `armv7`, suitable for iPhone 5 on iOS 10.3.3.
 - The app plays songs chosen from the device music library.

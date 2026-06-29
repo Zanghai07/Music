@@ -7,19 +7,16 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: |
-          sudo xcode-select -s /Applications/Xcode_15.0.1.app
-          xcodebuild -version
-          xcrun --sdk iphoneos --show-sdk-version
+      - name: Install Theos
+        uses: Randomblock1/theos-action@v1
 
-      - name: Build IPA
+      - name: Build iPhone 5 IPA
         run: |
           chmod +x ./build-ipa.sh
           ./build-ipa.sh

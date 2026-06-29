@@ -1,0 +1,8 @@
+Package: com.local.musicplayer
+Name: MusicPlayer
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Simple music player for jailbroken iOS 10 devices.
+Maintainer: Local
+Author: Local
+Section: Applications

@@ -26,9 +26,9 @@
 	<string>10.0</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>This app needs access to your music library so you can choose songs to play.</string>
-	<key>UIRequiredDeviceCapabilities</key>
+	<key>UIDeviceFamily</key>
 	<array>
-		<string>arm64</string>
+		<integer>1</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
