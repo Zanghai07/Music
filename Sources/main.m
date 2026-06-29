@@ -15,7 +15,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.player = [MPMusicPlayerController systemMusicPlayer];
 
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 568.0)];
     UIViewController *controller = [[UIViewController alloc] init];
     controller.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.08 blue:0.09 alpha:1.0];
     self.window.rootViewController = controller;
